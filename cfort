@@ -2,56 +2,8 @@
 # Note: This script is for testing purposes only
 # The executable that is installed by setup.py will be a wrapper script
 # that calls checkfort.launcher.main().
-
 import sys
 from checkfort import launcher
 
 launcher.main()
 sys.exit(0)
-
-#import os
-#import sys
-#from checkfort import version_string
-#from checkfort.forcheck import Forcheck
-#from checkfort.files import FileList
-#from checkfort.filegen import ResultWriter
-#from checkfort.exceptions import *
-
-print "CheckFort version %s\n" % version_string
-
-try:
-    lstfile = "tmpZa1Z9A.lst"
-    from checkfort.parser import ForcheckParser
-    #parser = ForcheckParser(lstfile)
-    #producer = ResultWriter(parser.state, "out_html")
-    #producer.run()
-    #sys.exit(0)
-    print "Locating source files ... "
-    input_files = FileList(sys.argv[1:]).files
-    forcheck = Forcheck(input_files)
-
-    print "Preparing for forcheck run ... "
-    print "Forcheck executable: %s" % forcheck.forcheck_exe
-    print "Forcheck license file: %s" % os.environ["FCKPWD"]
-    print "Forcheck version: %s" % ".".join(str(x)
-                                            for x in forcheck.forcheck_version)
-    print "Forcheck parameters: "
-    print "  Language standard  - %s" % forcheck.fortran_standard
-    print "  Layout format      - %s" % ("fixed", "free")[forcheck.free_format]
-    print "  Compiler emulation - %s" % forcheck.emulate_compiler
-    if forcheck.extra_opts:
-        print "  Extra options      - %s" % forcheck.extra_opts
-    print ""
-    #print " ".join(forcheck.get_command())
-    #sys.exit(0)
-    forcheck.run()
-
-    outdir = "cfort_html"
-    print ""
-    sys.stdout.flush()
-    producer = ResultWriter(forcheck.get_parser_state(), outdir)
-    producer.run()
-
-except CheckfortException, e:
-    print "ERROR: ", e
-    sys.exit(10)
