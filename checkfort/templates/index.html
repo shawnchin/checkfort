@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Result summary{% endblock %}
+
+{% block body %}
+    <h1>Forcheck results (generated on {{ gen_date }})</h1>
+
+    <table>
+        <tr>
+            <th>count</th>
+            <th>id</th>
+            <th>type</th>
+            <th>message</th>
+        </tr>
+        {% for event in event_summary %}
+        <tr>
+            <td align='center'>{{ event.count }}</td>
+            <td align='right'><a href='{{ to_root }}{{ event.link }}'>{{ event.numeric_code }}</a></td>
+            <td align='center'>{{ event.category }}</td>
+            <td align='left'>{{ event.message }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class='legend'>
+        I = information,
+        E = Error,
+        W = Warning,
+        O = FORCHECK Error (Overflow)
+    </div>
+
+{% endblock %}
+

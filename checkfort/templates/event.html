@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}{{ event.code }}{% endblock %}
+
+{% block body %}
+    <h1>{{ event.code }}: {{ event.message }}</h1>
+
+    {% if possible_causes %}
+    <table>
+        <tr><th>
+            Possible causes (extracted from the Forcheck documentation):
+        </th></tr>
+        <tr><td>
+            {% for cause in possible_causes %}
+                <ul>{{ cause }}</ul>
+            {% endfor %}
+        </td></tr>
+    </table>
+    {% endif %}
+
+    Found {{ event.count }} occurence(s):
+    <ul>
+        {% for e in event_instances %}
+        <li>
+            {% if e.filename %}
+                <a href='{{ to_root }}{{ e.link }}'>{{ e.filename }}
+                {% if e.linenum > 0 %}, line {{ e.linenum }}{% endif %}
+                </a>
+                ({{ e.culprit}})
+            {% elif e.culprit %}
+                {# global events have no filenames and the 'culprit' field is
+                   used to store details of event #}
+                {{ e.culprit }}
+            {% else %}
+                (No details provided)
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div>[ <a href='{{ to_root }}index.html'>Back to index</a> ]</div>
+{% endblock %}
+
+

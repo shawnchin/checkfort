@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ filename }}{% endblock %}
+
+{% block body %}
+    <h1>Source: {{ filename }}</h1>
+    
+    <div>
+        [ <a href='{{ to_root }}index.html'>Back to index</a> ]
+    </div>
+    
+    <hr />
+    <div class='highlight'><pre>
+{{ code_block }}
+    </pre></div>
+    
+    <div>[ <a href='{{ to_root }}index.html'>Back to index</a> ]</div>
+{% endblock %}
