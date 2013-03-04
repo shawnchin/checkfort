@@ -3,7 +3,7 @@ CheckFort : A wrapper for Forcheck
 ==================================
 
 CheckFort is a wrapper for `Forcheck`_, a static analyser for Fortran.
-CheckFort aims to simplify the launching of the forcheck and reformats its
+CheckFort aims to simplify the launching of forcheck and reformats its
 output into a format which we believe to be easier to navigate.
 
 
@@ -37,7 +37,8 @@ Run `cfort --help` for more options.
 Disclaimer:
 ===========
 
-CheckFort is developed independently from Forcheck
+CheckFort is developed independently from Forcheck and is neither endorsed
+nor supported by its provider.
 
 
 License:
