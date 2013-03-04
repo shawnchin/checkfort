@@ -2,7 +2,7 @@
 CheckFort : A wrapper for Forcheck
 ==================================
 
-CheckFort is a wrapper for Forcheck_, a static analyser for Fortran.
+CheckFort is a wrapper for `Forcheck`_, a static analyser for Fortran.
 CheckFort aims to simplify the launching of the forcheck and reformats its
 output into a format which we believe to be easier to navigate.
 
@@ -47,6 +47,6 @@ This software is licensed under the OSI-approved "3-clause BSD License".
 See the included LICENSE.txt file.
 
 
-.. Forcheck_: http://www.forcheck.nl/
+.. _Forcheck: http://www.forcheck.nl/
  
  
