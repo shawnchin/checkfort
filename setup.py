@@ -25,7 +25,7 @@ setup(
     url=project_url,
     packages=['checkfort'],
     include_package_data=True,
-    long_description=read('README'),
+    long_description=read('README.rst'),
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Console',
@@ -38,5 +38,5 @@ setup(
         "Topic :: Utilities",
         ],
     install_requires=["pygments >= 1.4", "jinja2", "chardet", "pexpect"],
-    entry_points={"console_scripts": ["cfort", "checkfort.launcher:main"]}
+    entry_points={"console_scripts": ["cfort = checkfort.launcher:main"]}
 )
