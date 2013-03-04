@@ -18,6 +18,7 @@ from checkfort.logging import verbose_enabled
 MIN_VESION = "14.2"
 
 DEFAULT_ARGS = ["-nshinc",    # Don't list statements of include files
+                "-plen 999",  # Reduce the number of page breaks
                 "-pwid 255",  # Place maximum possible characters (255)
                               #  on a line
                 "-batch"]     # Batch mode
@@ -212,8 +213,10 @@ class Forcheck(object):
                 except pexpect.EOF:
                     break
             child.close()
-            self.rc = child.exitstatus
+            rc = child.exitstatus
         try:
-            p_info("\nDONE. (rc=%d, %s)" % (self.rc, EXIT_CODES[self.rc]))
+            p_info("\nDONE. (rc=%d, %s)" % (rc, EXIT_CODES[rc]))
+            self.rc = rc
+            self.rc_message = EXIT_CODES[rc]
         except KeyError:
-            p_error("FAILED (rc=%d). See %s for details" % (self.rc, out))
+            p_error("FAILED (rc=%d). See %s for details" % (rc, out))

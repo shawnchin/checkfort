@@ -49,7 +49,7 @@ def main():
         set_debug_mode()
 
     # Once output verbosity set, we can print the output header
-    p_info("%s\n" % header)
+    p_info("%s" % header)
 
     # check allowed standards
     if o.standard not in supported_standards:
@@ -128,6 +128,12 @@ def do_action(params):
     # parse
     parser = ForcheckParser(forcheck_output, ignore_list=params["ignore_list"])
 
+    # result state
+    state = parser.state
+    state.rc = f.rc
+    state.rc_message = f.rc_message
+    state.command = " ".join(f.get_command())
+
     # generate output
     writer = ResultWriter(parser.state, params["outdir"])
     writer.run()
@@ -156,17 +162,17 @@ def parse_options():
     op.add_option("-e", "--file-extensions", type="string", dest="extensions",
                    help="Extensions to search for when traversing directories "
                         "(default: '%s')" % ",".join(default_extensions))
-    op.add_option("-s", "--fortran_standard", type="string", dest="standard",
+    op.add_option("-s", "--fortran-standard", type="string", dest="standard",
                    help="Fortran standard to validate against. "
                         "(default: '%s', options: '%s')"
                         % (default_standard, "', '".join(supported_standards)))
-    op.add_option("-c", "--compiler_emulation", type="string",
+    op.add_option("-c", "--compiler-emulation", type="string",
                   dest="emulation",
                   help="Compiler to emulate (default: %s)" % default_emulation)
     op.add_option("-i", "--ignore-err-codes", type="string", dest="ignore",
                   help="Comma-separated ist of error codes to ignore. "
                        "For example: --ignore-err-codes='234,153,9'")
-    op.add_option("-o", "--extra_options", type="string", dest="extra_opts",
+    op.add_option("-o", "--extra-options", type="string", dest="extra_opts",
                    help="Pass extra options to forcheck. (Note that some "
                         "options changes forcheck's output which may affect "
                         "checkfort's ability to parse the results.)")

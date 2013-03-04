@@ -27,5 +27,22 @@
         O = FORCHECK Error (Overflow)
     </div>
 
+    <br /><br />
+    <table>
+        <tr>
+            <th>Forcheck execution details</th>
+        </tr>
+        <tr>
+            <td>
+                <b>Environment variables</b>:<tt><pre>
+$FCKDIR = {{ FCKDIR }}
+$FCKCNF = {{ FCKCNF }}
+$FCKPWD = {{ FCKPWD }}
+</pre></tt>
+                {% if command %}<b>Command used</b>: <tt>{{ command }}</tt><br /><br />{% endif %}
+                {% if rc %}<b>Return status</b>: <tt>{{ rc }} ({{ rc_message }})</tt>{% endif %}
+            </td>
+        </tr>
+    </table>
 {% endblock %}
 

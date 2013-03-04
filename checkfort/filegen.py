@@ -115,6 +115,12 @@ class ResultWriter(object):
 
         ctx = self.default_context.copy()
         ctx["event_summary"] = self.events
+        ctx["FCKDIR"] = os.environ["FCKDIR"]
+        ctx["FCKCNF"] = os.environ["FCKCNF"]
+        ctx["FCKPWD"] = os.environ["FCKPWD"]
+        ctx["rc"] = self.state.rc
+        ctx["rc_message"] = self.state.rc_message
+        ctx["command"] = self.state.command
         with open(outfile, 'w') as f:
             f.write(render("index.html", ctx))
 
