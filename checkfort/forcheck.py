@@ -196,6 +196,15 @@ class Forcheck(object):
 
         self._store_prev = (line, self._store_prev[0])
 
+    def get_run_data(self):
+        return {
+            "rc": self.rc,
+            "rc_message": EXIT_CODES[self.rc],
+            "command": " ".join(self.get_command()),
+            "version_string": "Forcheck version %s" % \
+                              ".".join(str(x) for x in self.get_version()),
+        }
+
     def run(self):
         out = "forcheck.log"
         p_info("\nRunning forcheck (stdout written to %s)" % out)
@@ -213,10 +222,8 @@ class Forcheck(object):
                 except pexpect.EOF:
                     break
             child.close()
-            rc = child.exitstatus
+            self.rc = child.exitstatus
         try:
-            p_info("\nDONE. (rc=%d, %s)" % (rc, EXIT_CODES[rc]))
-            self.rc = rc
-            self.rc_message = EXIT_CODES[rc]
+            p_info("\nDONE. (rc=%d, %s)" % (self.rc, EXIT_CODES[self.rc]))
         except KeyError:
-            p_error("FAILED (rc=%d). See %s for details" % (rc, out))
+            p_error("FAILED (rc=%d). See %s for details" % (self.rc, out))

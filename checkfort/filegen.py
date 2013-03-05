@@ -118,9 +118,9 @@ class ResultWriter(object):
         ctx["FCKDIR"] = os.environ["FCKDIR"]
         ctx["FCKCNF"] = os.environ["FCKCNF"]
         ctx["FCKPWD"] = os.environ["FCKPWD"]
-        ctx["rc"] = self.state.rc
-        ctx["rc_message"] = self.state.rc_message
-        ctx["command"] = self.state.command
+        if hasattr(self.state, "run_data"):
+            ctx.update(self.state.run_data)
+
         with open(outfile, 'w') as f:
             f.write(render("index.html", ctx))
 

@@ -130,9 +130,7 @@ def do_action(params):
 
     # result state
     state = parser.state
-    state.rc = f.rc
-    state.rc_message = f.rc_message
-    state.command = " ".join(f.get_command())
+    state.run_data = f.get_run_data()
 
     # generate output
     writer = ResultWriter(parser.state, params["outdir"])
